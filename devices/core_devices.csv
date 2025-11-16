@@ -1,0 +1,15 @@
+# Core actuators (Meross + Sonoff) and Zigbee T/H sensors
+# This file is documentation only – no IPs, secrets, or MACs.
+
+kind,logical_id,entity_id,friendly_name,domain,platform,ha_area,device_name,device_model,manufacturer,layer,function,priority,notes
+actuator,manifold_circ_meross,switch.manifold_circ_mss710r_main_channel,"Manifold circ (mss710r) - Main channel",switch,meross_cloud,"plant_room","Manifold circ","mss710r","Meross","Actuators Inside","Primary manifold circulation pump",high,"UFH/plant core. Must be steerable by HA and policy layer."
+actuator,meross1_general,switch.meross1_mss710r_main_channel,"Meross1 (mss710r) - Main channel",switch,meross_cloud,"plant_room","Meross1","mss710r","Meross","Actuators Inside","General-purpose circulation / spare",medium,"Second Meross; can be reassigned as system grows."
+actuator,ufh_groundfloor_sonoff,switch.plant_gfloor_circ,"UFH Ground Floor Circ",switch,sonoff,"plant_room","Ground floor circ","BASICR2","SONOFF","Actuators Inside","Ground floor UFH circulation",high,"Main UFH ground floor loop relay."
+actuator,ufh_apartment_sonoff,switch.plant_apartment_circ,"UFH Apartment Circ",switch,sonoff,"plant_room","Circ3","BASICR2","SONOFF","Actuators Inside","Apartment UFH circulation",high,"Main UFH apartment loop relay."
+
+sensor,th1,sensor.t_h_1_temperature,"T/H 1 Temperature",sensor,mqtt,"inside","T/H 1","generic T/H","Zigbee","Sensors Inside","Room temperature (probe 1)",high,"Paired with sensor.t_h_1_humidity."
+sensor,th1_humidity,sensor.t_h_1_humidity,"T/H 1 Humidity",sensor,mqtt,"inside","T/H 1","generic T/H","Zigbee","Sensors Inside","Room humidity (probe 1)",medium,"Companion to T/H 1 temperature."
+sensor,th2,sensor.t_h_2_temperature,"T/H 2 Temperature",sensor,mqtt,"inside","T/H 2","generic T/H","Zigbee","Sensors Inside","Room temperature (probe 2)",high,"Paired with sensor.t_h_2_humidity."
+sensor,th2_humidity,sensor.t_h_2_humidity,"T/H 2 Humidity",sensor,mqtt,"inside","T/H 2","generic T/H","Zigbee","Sensors Inside","Room humidity (probe 2)",medium,"Companion to T/H 2 temperature."
+sensor,th_display,sensor.t_h_display_1_temperature,"T/H Display Temperature",sensor,mqtt,"inside","T/H Display 1","display T/H","Zigbee","Sensors Inside","Reference display temperature",high,"Paired with sensor.t_h_display_1_humidity."
+sensor,th_display_humidity,sensor.t_h_display_1_humidity,"T/H Display Humidity",sensor,mqtt,"inside","T/H Display 1","display T/H","Zigbee","Sensors Inside","Reference display humidity",medium,"Companion to T/H display temperature."
