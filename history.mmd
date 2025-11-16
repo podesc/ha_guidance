@@ -1,12 +1,12 @@
 flowchart TD
-  subgraph History[HISTORY STREAM]
-    E[Event Log<br/>actions • readings • overrides]
-    C[Config Log<br/>before→after • proposer • approver]
-    X[Experiment Log<br/>window • rollback • metrics • outcome]
+  subgraph HistoryStream [History Stream]
+    E[Event Log  actions readings overrides decisions]
+    C[Config Log  before after proposer approver]
+    X[Experiment Log  window rollback metrics outcome]
   end
 
   E --> HOUT
   C --> HOUT
   X --> HOUT
 
-  HOUT[(Immutable Append-Only Record)]
+  HOUT[(Immutable Append Only Record)]
