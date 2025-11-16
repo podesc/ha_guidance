@@ -1,0 +1,41 @@
+flowchart TD
+
+  W[World Layer]
+  SO[Sensors Outside]
+  SI[Sensors Inside]
+  P[Processing: ETL + features]
+  C[Cognition/Review]
+  D[Data Plane T1…Tx]
+  A[Actuation]
+
+  W --> SO --> SI --> P --> C --> A
+  P --> D
+  A --> D
+  D --> C
+
+  subgraph Services[Shared Services]
+    T[(Time)]
+    S[(Safety)]
+    I[(Inventory / Identity)]
+  end
+
+  T --- W
+  T --- P
+  T --- C
+  T --- A
+
+  S -.-> A
+  S -.-> C
+
+  I --- SO
+  I --- SI
+  I --- W
+
+  subgraph Hist[History Stream]
+    H[(Append-only Logs)]
+  end
+
+  H --- P
+  H --- C
+  H --- A
+  
