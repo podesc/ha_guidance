@@ -1,0 +1,14 @@
+flowchart LR
+  subgraph Cognition[COGNITION / REVIEW]
+    R1[Predetermined<br/>rules • modes • defaults]
+    R2[Human Input<br/>nudges • temporary modes<br/>structural proposals]
+    R3[AI Input<br/>predictions • suggestions<br/>experiment proposals]
+    R4[Review Required<br/>uncertainty • exceptions<br/>experimental approval]
+  end
+
+  R1 --> OUT
+  R2 --> OUT
+  R3 --> OUT
+  R4 --> OUT
+
+  OUT[(Validated Decision<br/>to Actuation Layer)]
