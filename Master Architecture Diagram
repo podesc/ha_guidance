@@ -1,0 +1,39 @@
+flowchart TD
+  W[World Layer<br/>weather • tariffs • zones • inventory]
+  SO[Sensors Outside<br/>external climate + boundary sensors]
+  SI[Sensors Inside<br/>room temps • humidity • flow/return • power]
+  P[Processing Layer<br/>ETL • cleaning • features]
+  C[Cognition / Review Layer<br/>rules • human input • AI input • review-required]
+  D[Data Layer (Data Plane)<br/>T1…Tx across all DBs]
+  A[Actuation Layer<br/>HA • pumps • valves • EV charger]
+
+  W --> SO --> SI --> P --> C --> A
+  P --> D
+  A --> D
+  D --> C
+
+  subgraph Services[Shared Services]
+    T[(Time Service)]
+    S[(Safety Interlocks)]
+    I[(Inventory / Identity / Location Service)]
+  end
+
+  T --- W
+  T --- P
+  T --- C
+  T --- A
+
+  S -.-> A
+  S -.-> C
+
+  I --- W
+  I --- SO
+  I --- SI
+
+  subgraph History[History Stream]
+    H[(Append-only logs<br/>events • configs • experiments)]
+  end
+
+  H --- P
+  H --- C
+  H --- A
