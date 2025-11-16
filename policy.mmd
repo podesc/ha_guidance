@@ -1,19 +1,21 @@
 flowchart LR
-  P1[comfort_first]
-  P2[balanced]
-  P3[cheap_first]
-
-  classDef pol fill=#d9f1ff,stroke=#0077b6,stroke-width=1.4;
-
-  class P1,P2,P3 pol;
-
-  subgraph Policy[POLICY (Human-Selected)]
-    P1
-    P2
-    P3
+  subgraph PolicyBlock [Policy Human Selected]
+    P1[Policy comfort first]
+    P2[Policy balanced]
+    P3[Policy cheap first]
   end
 
-  Policy --> AI[(AI Proposals)]
-  Policy --> REV[(Review Decisions)]
+  P1 --> AI
+  P2 --> AI
+  P3 --> AI
+
+  P1 --> REV
+  P2 --> REV
+  P3 --> REV
+
+  AI[(AI Proposals inside chosen policy)]
+  REV[(Review Decisions)]
+  ACT[(Actuation Layer)]
+
   AI --> REV
-  REV --> ACT[(Actuation Layer)]
+  REV --> ACT
