@@ -1,0 +1,19 @@
+flowchart LR
+  P1[comfort_first]
+  P2[balanced]
+  P3[cheap_first]
+
+  classDef pol fill=#d9f1ff,stroke=#0077b6,stroke-width=1.4;
+
+  class P1,P2,P3 pol;
+
+  subgraph Policy[POLICY (Human-Selected)]
+    P1
+    P2
+    P3
+  end
+
+  Policy --> AI[(AI Proposals)]
+  Policy --> REV[(Review Decisions)]
+  AI --> REV
+  REV --> ACT[(Actuation Layer)]
