@@ -1,22 +1,21 @@
 flowchart TD
-
-  W[World Layer]
-  SO[Sensors Outside]
-  SI[Sensors Inside]
-  P[Processing: ETL + features]
-  C[Cognition/Review]
-  D[Data Plane T1…Tx]
-  A[Actuation]
+  W[World Layer  external info zones inventory tariffs]
+  SO[Sensors Outside  outdoor climate and boundary]
+  SI[Sensors Inside  indoor climate flows power occupancy]
+  P[Processing  ETL cleaning features]
+  C[Cognition Review  rules human AI review required]
+  D[Data Plane  all databases tables T1 to Tx]
+  A[Actuation  HA devices pumps valves EV charger]
 
   W --> SO --> SI --> P --> C --> A
   P --> D
   A --> D
   D --> C
 
-  subgraph Services[Shared Services]
-    T[(Time)]
-    S[(Safety)]
-    I[(Inventory / Identity)]
+  subgraph SharedServices [Shared Services]
+    T[(Time Service)]
+    S[(Safety Interlocks)]
+    I[(Inventory Identity Location)]
   end
 
   T --- W
@@ -24,18 +23,17 @@ flowchart TD
   T --- C
   T --- A
 
-  S -.-> A
   S -.-> C
+  S -.-> A
 
+  I --- W
   I --- SO
   I --- SI
-  I --- W
 
-  subgraph Hist[History Stream]
-    H[(Append-only Logs)]
+  subgraph Hist [History Stream]
+    H[(Append only logs and versions)]
   end
 
   H --- P
   H --- C
   H --- A
-  
