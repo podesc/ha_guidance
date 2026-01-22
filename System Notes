@@ -1,0 +1,95 @@
+# System State & Workarounds
+
+This document records persistent, non-default system behaviours and
+architectural decisions for two Linux hosts.
+
+Purpose:
+- make implicit state explicit
+- reduce rediscovery cost
+- avoid folklore fixes
+
+No identifying information is included.
+
+---
+
+## Host Encoding
+
+- **White** = AIU22 (white case)
+- **Black** = FUB22 (black case)
+
+Encoding is intentional to avoid name/IP leakage in a public repo.
+
+---
+
+## Shared Architectural Principles
+
+- Linux is the sole boot owner
+- No dual-boot Windows
+- Windows (when present) runs only as a VM
+- Host swap is file-based and host-owned
+- One authority per concern (UI > script > note)
+
+---
+
+## Black (FUB22)
+
+### Display / GPU
+
+- **DPMS disabled**
+  - Method: X11 autostart entry
+  - Reason: Prevents sleep/wake instability
+  - Status: Active
+
+- **Forced display resolution**
+  - Method: X11 autostart entry
+  - Reason: Monitor EDID / handshake issues
+  - Status: Active
+
+- **GPU fan behaviour**
+  - Hardware: NVIDIA GPU with unstable low-RPM region
+  - Symptom: Fan hunting below ~35% PWM
+  - Resolution: Enforced minimum fan curve via GreenWithEnvy
+  - Status: Active
+  - Note: Script-based workaround deprecated and removed
+
+### Storage
+
+- **Swap**
+  - Method: `/swapfile`
+  - Reason: Remove dependency on legacy Windows disks
+  - Status: Active
+
+### Network
+
+- **Wake-on-LAN**
+  - Interfaces: Enabled on selected NICs
+  - Intentional: Yes
+  - Status: Active
+
+---
+
+## White (AIU22)
+
+*(Intentionally sparse; only persistent deviations from default should be listed)*
+
+---
+
+## Retired / Avoided Patterns
+
+- Dual-boot Windows
+- Firmware-level fan control hacks
+- Persistent background scripts without visibility
+
+---
+
+## Operating Principle
+
+If a workaround:
+- survives reboot, or
+- affects hardware behaviour
+
+…it must be either:
+- visible via a UI, or
+- explicitly recorded here.
+
+Ephemeral fixes do not belong in this document.
